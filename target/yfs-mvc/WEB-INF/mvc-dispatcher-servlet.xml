@@ -21,14 +21,16 @@
     <mvc:resources location="/page/" mapping="/page/**"/>
 
 	<!-- json convert -->
-	<!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
-	<!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<bean class="com.yfs.mvc.handlermapping.MyRequestMappingHandlerMapping" >
+		<property name="order" value="0" />
+	</bean>
+	<bean class="com.yfs.mvc.handleradapter.MyRequestMappingHandlerAdapter" name="myRequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 			</list>
 		</property>
-	</bean>-->
+	</bean>
 
 	<!-- jsp pages -->
 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

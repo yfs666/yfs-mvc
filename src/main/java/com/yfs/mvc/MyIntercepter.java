@@ -1,5 +1,6 @@
 package com.yfs.mvc;
 
+import com.yfs.mvc.handleradapter.MyRequestMappingHandlerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,11 +27,13 @@ import java.util.Map;
 
 public class MyIntercepter  extends HandlerInterceptorAdapter {
 
-    @Autowired
-    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+    @Resource(name = "myRequestMappingHandlerAdapter")
+    private MyRequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String requestURI = request.getRequestURI();
+        System.out.println("url = " + requestURI);
         System.out.println("MyIntercepter  preHandle >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         return super.preHandle(request, response, handler);
     }

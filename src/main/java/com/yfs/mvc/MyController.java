@@ -1,5 +1,6 @@
 package com.yfs.mvc;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
-@RequestMapping("my")
+@Component
+@RequestMapping("/my/")
 public class MyController {
 
     @RequestMapping(value = "yfs1", method = RequestMethod.GET)
@@ -19,7 +20,7 @@ public class MyController {
         return "my1";
     }
     @ResponseBody
-    @RequestMapping(value = "yfs2", method = RequestMethod.GET)
+    @RequestMapping(value = "/yfs2", method = RequestMethod.GET)
     public Object yfs2() {
         Map<String,String> json = new HashMap<>(2);
         json.put("aaa","aaa");
