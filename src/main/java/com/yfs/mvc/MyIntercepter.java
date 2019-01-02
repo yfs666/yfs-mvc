@@ -64,25 +64,34 @@ public class MyIntercepter  extends HandlerInterceptorAdapter {
         // 消息转换器，在此处可以对转换器进行自定义配置
         List<HttpMessageConverter<?>> httpMessageConverters = requestMappingHandlerAdapter.getMessageConverters();
         // 添加自定义 responseBody 处理器，并放在第一位
-        ResponseBodyReturnValueHandlerExt processorExt = new ResponseBodyReturnValueHandlerExt(httpMessageConverters);
+//        ResponseBodyReturnValueHandlerExt processorExt = new ResponseBodyReturnValueHandlerExt(httpMessageConverters);
         List<HandlerMethodReturnValueHandler> handlerMethodReturnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
         List<HandlerMethodReturnValueHandler> newReturnValueHandlers = new ArrayList<>(handlerMethodReturnValueHandlers.size() + 1);
-        newReturnValueHandlers.add(processorExt);
+        newReturnValueHandlers.add(new RequestResponseBodyMethodProcessor(httpMessageConverters) {
+            @Override
+            public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest)
+                    throws IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException {
+                System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................start");
+                System.out.println(returnValue);
+                System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................end");
+                super.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
+            }
+        });
         newReturnValueHandlers.addAll(handlerMethodReturnValueHandlers);
         requestMappingHandlerAdapter.setReturnValueHandlers(newReturnValueHandlers);
     }
 }
-
-class ResponseBodyReturnValueHandlerExt extends RequestResponseBodyMethodProcessor {
-    public ResponseBodyReturnValueHandlerExt(List<HttpMessageConverter<?>> converters) {
-        super(converters);
-    }
-    @Override
-    public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest)
-            throws IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException {
-        System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................start");
-        System.out.println(returnValue);
-        System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................end");
-        super.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
-    }
-}
+//
+//class ResponseBodyReturnValueHandlerExt extends RequestResponseBodyMethodProcessor {
+//    public ResponseBodyReturnValueHandlerExt(List<HttpMessageConverter<?>> converters) {
+//        super(converters);
+//    }
+//    @Override
+//    public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest)
+//            throws IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException {
+//        System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................start");
+//        System.out.println(returnValue);
+//        System.out.println("自定义ResponseBody处理器，在此处可以针对ResponseBody进行再封装.........................end");
+//        super.handleReturnValue(returnValue, returnType, mavContainer, webRequest);
+//    }
+//}
