@@ -43,7 +43,9 @@ public abstract class MyAbstractHandlerMethodAdapter extends WebContentGenerator
     @Override
     public final boolean supports(Object handler) {
         //TODO for yfs
-        return (handler instanceof HandlerMethod && supportsInternal((HandlerMethod) handler));
+        Boolean isHandlerMethod = handler instanceof HandlerMethod;
+        boolean isSupportsInternal = supportsInternal((HandlerMethod) handler);
+        return isHandlerMethod && isSupportsInternal;
     }
 
     /**

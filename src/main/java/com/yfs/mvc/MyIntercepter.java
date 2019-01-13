@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class MyIntercepter  extends HandlerInterceptorAdapter {
 
-    @Resource(name = "myRequestMappingHandlerAdapter")
+//    @Resource(name = "myRequestMappingHandlerAdapter")
     private MyRequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
     @Override
@@ -58,7 +58,7 @@ public class MyIntercepter  extends HandlerInterceptorAdapter {
         super.afterCompletion(request, response, handler, ex);
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         System.out.println("add RequestResponseBodyMethodProcessorExt to HandlerMethodReturnValueHandlers...");
         // 消息转换器，在此处可以对转换器进行自定义配置

@@ -17,8 +17,20 @@ public class MyController {
     @RequestMapping(value = "yfs1", method = RequestMethod.GET)
     public String yfs1(Model model) {
         model.addAttribute("name", "yfs");
-        return "my1";
+        return "my1.jsp";
     }
+    @RequestMapping(value = "yfs11", method = RequestMethod.GET)
+    public String yfs11(Model model) {
+        model.addAttribute("name", "yfs");
+        return "my1.vm";
+    }
+
+    @RequestMapping(value = "yfs111", method = RequestMethod.GET)
+    public String yfs111(Model model) {
+        model.addAttribute("name", "yfs");
+        return "my1.alasijia";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/yfs2", method = RequestMethod.GET)
     public Object yfs2() {

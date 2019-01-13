@@ -1,0 +1,20 @@
+<div>
+	$myName
+</div>
+<div>
+	$myAge
+</div>
+<div>
+	${myName}
+</div>
+<div>
+    <%
+    String name = (String) request.getAttribute("name");
+    %>
+
+    <%
+    out.println(name+"aaa");
+    %>
+
+    <%=name+"bbb"%>
+</div>

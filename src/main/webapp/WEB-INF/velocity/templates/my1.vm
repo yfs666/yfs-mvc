@@ -5,16 +5,16 @@
     <title>yfs test</title>
 </head>
 <body>
-${name}
+    ${name}
 
-$name
+    $name
 
 <%
-    String name = (String) request.getAttribute("name");
+String name = (String) request.getAttribute("name");
 %>
 
 <%
-    out.println(name+"aaa");
+out.println(name+"aaa");
 %>
 
 <%=name+"bbb"%>

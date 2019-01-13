@@ -7,5 +7,17 @@
 <body>
 ${name}
 
+$name
+
+<%
+    String name = (String) request.getAttribute("name");
+%>
+
+<%
+    out.println(name+"aaa");
+%>
+
+<%=name+"bbb"%>
+
 </body>
 </html>

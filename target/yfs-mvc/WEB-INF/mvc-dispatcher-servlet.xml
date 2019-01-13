@@ -20,6 +20,13 @@
     <!-- 访问静态资源 -->
     <mvc:resources location="/page/" mapping="/page/**"/>
 
+	<bean id="velocityConfig"
+		  class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="configLocation">
+			<value>/WEB-INF/velocity/velocity.properties</value>
+		</property>
+	</bean>
+
 	<!-- json convert -->
 	<bean class="com.yfs.mvc.handlermapping.MyRequestMappingHandlerMapping" >
 		<property name="order" value="0" />
@@ -32,11 +39,21 @@
 		</property>
 	</bean>
 
-	<!-- jsp pages -->
+	<!--<bean id="viewResolver"-->
+		  <!--class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
+		<!--<property name="cache" value="false" />-->
+		<!--<property name="prefix" value="/templates/" />-->
+		<!--&lt;!&ndash;<property name="suffix" value=".vm" />&ndash;&gt;-->
+		<!--<property name="exposeSpringMacroHelpers" value="true" />-->
+		<!--<property name="exposeSessionAttributes" value="true" />-->
+		<!--<property name="contentType" value="text/html;charset=UTF-8" />-->
+	<!--</bean>-->
+
+	<!-- jsp pages-->
 	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
+		<!--<property name="suffix" value=".jsp" />-->
 	</bean>
 
 	<mvc:interceptors>
